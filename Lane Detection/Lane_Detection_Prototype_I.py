@@ -26,9 +26,6 @@ def draw_the_lines(image,lines,roi):
 #Caputuring the video
 
 cap = cv.VideoCapture(path)
-f = open("file_py.txt","r")
-Cal_Len = f.read()
-print(int(Cal_Len))
 while (cap.isOpened()):
     ret, frame = cap.read()
 	
@@ -63,7 +60,7 @@ while (cap.isOpened()):
         for x1,y1,x2,y2 in line:
             length = math.sqrt(((x2-x1)**2)+((y2-y1)**2));
             angle = math.degrees(math.atan((x1-x2)/(y1-y2)));
-            if(length >= int(Cal_Len) and ((angle>(-80) and angle<(-30)) or ((angle <80) and (angle>30)))):
+            if(length >= 150 and ((angle>(-80) and angle<(-30)) or ((angle <80) and (angle>30)))):
                 print("angle : "+str(math.degrees(math.atan((x1-x2)/(y1-y2)))))
                 print("length :"+str(length));
                 LongLines.append(line);
