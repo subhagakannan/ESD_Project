@@ -9,7 +9,7 @@ import cv2 as cv
 import numpy as np
 import math
 from matplotlib import pyplot as plt
-path = r'J:\\ESD Project\\test_video\\test_video.mp4'
+path = r'J:\\ESD Project\\test_video\\test_video_1.MOV'
 i=1
 
 #Method to draw the lines obtained from Hough transform
@@ -19,13 +19,16 @@ def draw_the_lines(image,lines,roi):
     line_color = [0,255,0]
     for line in lines:
         for x1,y1,x2,y2 in line:
-            cv.line(blank_image,(x1,(y1+int(roi[1]))),(x2,(y2+int(roi[1]))),(0,200,0),thickness=10)
+            cv.line(blank_image,((x1+int(roi[0])),(y1+int(roi[1]))),((x2+int(roi[0])),(y2+int(roi[1]))),(0,200,0),thickness=10)
     img =cv.addWeighted(img,0.8,blank_image,1,0.0)
     return img
 
 #Caputuring the video
 
 cap = cv.VideoCapture(path)
+f = open("file_py.txt","r")
+Cal_Len = f.read()
+print(int(Cal_Len))
 while (cap.isOpened()):
     ret, frame = cap.read()
 	
@@ -60,7 +63,7 @@ while (cap.isOpened()):
         for x1,y1,x2,y2 in line:
             length = math.sqrt(((x2-x1)**2)+((y2-y1)**2));
             angle = math.degrees(math.atan((x1-x2)/(y1-y2)));
-            if(length >= 150 and ((angle>(-80) and angle<(-30)) or ((angle <80) and (angle>30)))):
+            if(length >= int(Cal_Len) and ((angle>(-80) and angle<(-30)) or ((angle <80) and (angle>30)))):
                 print("angle : "+str(math.degrees(math.atan((x1-x2)/(y1-y2)))))
                 print("length :"+str(length));
                 LongLines.append(line);
