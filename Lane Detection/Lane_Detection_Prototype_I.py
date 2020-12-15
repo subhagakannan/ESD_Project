@@ -2,7 +2,7 @@
 #Author: Saranyaa Suresh, Juliet Eldo, Subhaga Kannan, Dhanush Lingeswaran
 #Description: The Prototype I SW detects the straight lanes in which the Autonomous vehicle is driving. 
 #Canny filter works with fixed thresholds. This has to be checked if it works with real-time data. Fine tuning has to be done incase of failure.
-"""The Region of lanes being present is done by the user. These values should be taekn from calibration data in the next release""" #satisfied
+#The Region of lanes being present, length and angles of the lanes are taken from calibration data.
 #The length and the angle of lanes must be fine tuned after real time testing to support the camera features.
 
 import cv2 as cv
