@@ -9,7 +9,7 @@ import cv2 as cv
 import numpy as np
 import math
 from matplotlib import pyplot as plt
-path = r'E:\\ESD_Project\\Takeover.M4v'
+path = r'/home/pi/Desktop/ESDgit/ESDproject/sample images/test_video1.mp4'
 
 #Method to draw the lines obtained from Hough transform
 def draw_the_lines(image,lines,roi):
@@ -38,11 +38,12 @@ def Calibration(frame_cal,roi_CalFunc):
     f.write(str(roi_CalOut[1])+"\n")
     f.write(str(roi_CalOut[2])+"\n")
     f.write(str(roi_CalOut[3])+"\n")
+    cv.destroyAllWindows()
     return roi_CalOut
 def elements(array):
     return array.ndim and array.size
 #Caputuring the video
-cap = cv.VideoCapture(path)
+cap = cv.VideoCapture(0)
 
 #Read the calibration data for ROI, length and angles
 roi_Cal = [x.strip() for x in open("ROI_Cal.txt","r")]
@@ -52,7 +53,7 @@ roi = roi_Cal
 while (cap.isOpened()):
     print("Press 's' to enter the Calibration mode")
     ret, Orgframe = cap.read()
-    frame = cv.resize(Orgframe,(480,320))
+    frame = cv.resize(Orgframe,(800,600))
     if cv.waitKey(10) & 0xFF == ord('s'):
         roi = Calibration(frame,roi)
     
@@ -97,7 +98,9 @@ while (cap.isOpened()):
     else:
         image_lines = frame
     if ret == True:
-        cv.imshow("video", image_lines)
+        cv.namedWindow('frame2',cv.WND_PROP_FULLSCREEN)
+        cv.setWindowProperty('frame2', cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
+        cv.imshow("frame2", image_lines)
         if cv.waitKey(10) & 0xFF == ord('q'):
             break
     else:
