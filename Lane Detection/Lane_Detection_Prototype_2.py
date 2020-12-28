@@ -13,7 +13,7 @@ from operator import itemgetter
 import shapely
 from shapely.geometry import LineString, Point
 
-path = r'E:\ESD_Project\Img 2150 Autobahn Rightlane Somesigns.m4v'
+path = r'E:\ESD_Project\Takeover.m4v'
 
 #Method to draw the lines obtained from Hough transform
 def draw_the_lines(image,lines,roi):
@@ -22,7 +22,7 @@ def draw_the_lines(image,lines,roi):
     line_color = [0,255,0]
     for line in lines:
         for x1,y1,x2,y2 in line:
-            cv.line(blank_image,((x1+int(roi[0])),(y1+int(roi[1]))),((x2+int(roi[0])),(y2+int(roi[1]))),(0,0,255),thickness=10)
+            cv.line(blank_image,((x1+int(roi[0])),(y1+int(roi[1]))),((x2+int(roi[0])),(y2+int(roi[1]))),(0,255,0),thickness=10)
     img =cv.addWeighted(img,0.8,blank_image,1,0.0)
     return img
 #Method to Calibrate ROI
@@ -164,7 +164,7 @@ while (cap.isOpened()):
                         #print(line)
                         #print(length)
                         if((line[0,3] == numrows) and (line[0,1] == 0)):
-                            print(line)
+                           # print(line)
                             LongLines.append(line);
                             distFrmCenter.append((centerpoint - line[0][2]));
                             #print(distFrmCenter)
@@ -185,10 +185,13 @@ while (cap.isOpened()):
                 #print('élse')
                 selectline.append(PrevLeftLane);
                 LErrorFrames+=1
-            if((LErrorFrames>=50) or (firstFrame==1)):
+            if((LErrorFrames>=20) or (firstFrame==1)):
                 #print('entered')
                 PrevLeftLane = LongLines[LeftLaneIdx]
                 LErrorFrames = 0
+        elif(LErrorFrames<20):
+            selectline.append(PrevLeftLane);
+            LErrorFrames+=1
         if(RightLaneIdx != None):
             if((((PrevRightLane[0][0] - LongLines[RightLaneIdx][0][0]) > 0) or (firstFrame == 1)) and ((centerpoint-LongLines[RightLaneIdx][0][0])<0)):
                 selectline.append(LongLines[RightLaneIdx]);
@@ -197,10 +200,13 @@ while (cap.isOpened()):
                 #print('élse')
                 selectline.append(PrevRightLane);
                 RErrorFrames+=1
-            if((RErrorFrames>=50) or (firstFrame==1)):
+            if((RErrorFrames>=20) or (firstFrame==1)):
                 #print('entered')
                 PrevRightLane = LongLines[RightLaneIdx]
                 RErrorFrames = 0
+        elif(RErrorFrames<20):
+            selectline.append(PrevRightLane);
+            RErrorFrames+=1
         print(selectline)
     #    
     #if(len(selectline) !=0 ):
