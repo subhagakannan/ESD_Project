@@ -90,6 +90,7 @@ while (cap.isOpened()):
                     #print("angle : "+str(math.degrees(math.atan((x1-x2)/(y1-y2)))))
                     #print("length :"+str(length));
                     LongLines.append(line);
+        
     else:
         print("no lines");
     #print(LongLines);
