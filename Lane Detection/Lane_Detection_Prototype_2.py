@@ -13,7 +13,7 @@ from operator import itemgetter
 import shapely
 from shapely.geometry import LineString, Point
 
-path = r'/home/pi/Desktop/ESDgit/ESDproject/sample images/test_video2.mp4'
+path = r'/home/pi/Desktop/ESDgit/ESDproject/sample images/test_video4.mp4'
 
 #Method to draw the lines obtained from Hough transform
 def draw_the_lines(image,lines,roi):
