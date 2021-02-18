@@ -19,3 +19,5 @@ Method 2
 1.Download the following  folder : https://drive.google.com/drive/folders/1hePHBdhJyRj1umQuWRL8OzSr9uOhaVdv?usp=sharing .
 2.Place the downloaded folder on desktop.
 3.Run the main.py present inside the inference folder.
+
+
