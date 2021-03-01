@@ -1,1 +1,0 @@
-Data set used :http://benchmark.ini.rub.de/?section=gtsdb&subsection=dataset
